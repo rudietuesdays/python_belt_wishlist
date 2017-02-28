@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{item.item}}</title>
+    </head>
+    <body>
+        <a href="{% url 'wishList:dashboard' %}">Home</a>
+        <a href="{% url 'loginReg:logout' %}">Logout</a>
+        <h1>{{item.item}}</h1>
+        <p>Users who added this item to their wish list:</p>
+        {% if item.user.id == request.session.uid %}
+        <p>{{user.name}}</p>
+        {% else %}
+        <p>{{item.user.name}}</p>
+        {% endif %}
+        {% for user in wish %}
+        <p>{{user.user.name}}</p>
+        {% endfor %}
+    </body>
+</html>
