@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{{item.item}}</title>
-    </head>
-    <body>
-        <a href="{% url 'wishList:dashboard' %}">Home</a>
-        <a href="{% url 'loginReg:logout' %}">Logout</a>
-        <h1>{{item.item}}</h1>
+
+<head>
+  <meta charset="utf-8">
+  <title>{{item.item}}</title>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="cyan lighten-4">
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+    <div class="container">
+      <a href="{% url 'wishList:dashboard' %}">Home</a> |
+      <a href="{% url 'loginReg:logout' %}">Logout</a>
+      <h1 class="center-align orange darken-2 teal-text text-lighten-5">{{item.item}}</h1>
+      <div class="row teal lighten-4 teal-text text-darken-4">
         <p>Users who added this item to their wish list:</p>
         {% if item.user.id == request.session.uid %}
         <p>{{user.name}}</p>
         {% else %}
         <p>{{item.user.name}}</p>
-        {% endif %}
-        {% for user in wish %}
+        {% endif %} {% for user in wish %}
         <p>{{user.user.name}}</p>
         {% endfor %}
-    </body>
+      </div>
+    </div>
+</body>
+
 </html>
